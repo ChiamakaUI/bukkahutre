@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Bukkahut-Recipes</title>
+  </head>
+
+  <body>
+    <div class="mobile">
+      <p>Mobile view not supported</p>
+    </div>
+    <section class="user-login none not-mobile">
+      <h2 style="text-align: center; background-color: #fff; font-size: 35px;">
+        Login
+      </h2>
+      <form class="user-form">
+        <div class="form-group">
+          <label for="user_username" class="label">Email</label><br />
+          <input
+            type="email"
+            id="user_username"
+            class="user_email inputfield"
+            placeholder="enter email"
+            required
+          /><br />
+          <label for="user_password" class="label">Password</label><br />
+          <input
+            type="password"
+            id="user_password"
+            class="user_password inputfield"
+            placeholder="enter password"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <button class="button" type="submit" style="margin: 1rem 0;">
+            Submit</button
+          ><br />
+        </div>
+      </form>
+    </section>
+
+    <div class="user-content not-mobile">
+      <nav class="nav home-nav">
+        <div>
+          <img
+            src="assets/images/bukkahutlogo.png"
+            alt="bukkahut"
+            width="100px"
+            height="70px"
+          />
+        </div>
+        <p><a href="#" class="signout">Sign out</a></p>
+      </nav>
+      <section class="home">
+        <div class="section">
+          <form class="form flex">
+            <label for="search-recipe"> </label>
+            <input
+              type="search"
+              id="search-recipe"
+              class="input search"
+              placeholder="search recipes"
+            />
+          </form>
+        </div>
+        <div class="container">
+          <a href="./recipe.html" class="search-results"></a>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
+            eos commodi perspiciatis aspernatur ducimus quibusdam, rerum non
+            facilis quod eaque ad, incidunt accusamus, quia sed aperiam!
+            Veritatis quos laudantium doloremque beatae atque deleniti animi
+            unde eius consectetur praesentium ipsa cupiditate, optio dolorum
+            error provident est labore excepturi! Qui, illum nemo?
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        getDocs,
+        doc,
+        query,
+        where,
+        setDoc,
+      } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js";
+      // import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js";
+
+      // const APIKEY = '3dcfe8aa07caee3b5cf31f8cb8259765';
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBXhz9n1bwKrhWwXXED2570SyUrIJoT6lI",
+        authDomain: "bukkahut-80159.firebaseapp.com",
+        projectId: "bukkahut-80159",
+        storageBucket: "bukkahut-80159.appspot.com",
+        messagingSenderId: "381102566327",
+        appId: "1:381102566327:web:5f9131990428befa76d632",
+      };
+
+      const userForm = document.querySelector(".user-form");
+      const userEmail = document.querySelector(".user_email");
+      const userPassword = document.querySelector(".user_password");
+      const userLogin = document.querySelector(".user-login");
+      const userContent = document.querySelector(".user-content");
+      const signout = document.querySelector(".signout");
+      const media = window.matchMedia("(max-width: 1000px)");
+      const notMobile = document.querySelectorAll(".not-mobile");
+
+      window.addEventListener("load", () => {
+        if (media.matches) {
+          userLogin.style.display = "none";
+          userContent.style.display = "none";
+          for (let i = 0; i < notMobile.length; i++) {
+            notMobile[i].style.display = "none";
+          }
+        } else if (
+          sessionStorage.getItem("user") === null ||
+          sessionStorage.getItem("user") === undefined
+        ) {
+          console.log("seen");
+          userLogin.style.display = "block";
+          userContent.style.display = "none";
+          for (let i = 0; i < notMobile.length; i++) {
+            notMobile[i].style.display = "block";
+          }
+        } else {
+          userLogin.style.display = "none";
+          userContent.style.display = "block";
+          for (let i = 0; i < notMobile.length; i++) {
+            notMobile[i].style.display = "block";
+          }
+        }
+      });
+
+      userForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const emailValue = userEmail.value;
+        const passwordValue = userPassword.value;
+        console.log(emailValue, passwordValue);
+
+        //sign up
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, emailValue, passwordValue)
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(emailValue);
+            sessionStorage.setItem("user", emailValue);
+            alert("login successful!");
+            location.reload();
+            // authArea.innerText = `${sessionStorage.getItem('email')}`
+            // authArea.style.paddingLeft = '10px';
+            // authArea.style.color = '#f88835';
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          });
+      });
+
+      signout.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        sessionStorage.removeItem("user");
+        location.reload();
+      });
+    </script>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 24px;
+  font-family: 'DM Sans', sans-serif;
+  /* background-color: rgb(187, 187, 187); */
+}
+
+body, #body {
+  height: 100vh;
+  /* background-image: url(./assets/images/bukkahutlogo.png); */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 300px;
+}
+
+/* #body {
+  background-position: center;
+  background-size: 10000px;
+} */
+
+.home-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav {
+  margin: 0rem 2rem;
+}
+
+.nav > .admin {
+  width: 180px;
+}
+
+.admin_nav {
+  margin: 1rem;
+}
+
+.flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recipe-display {
+  padding: 2rem 3rem;
+  /* width: 70%; */
+  margin: 1rem 2rem;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #FF6600;
+  border-radius: 1rem;
+  align-items: flex-start;
+}
+
+.recipe-detail {
+  /* padding: 3rem 2rem; */
+  width: 94%;
+  margin: 0 auto;
+  background-color: #fff;
+  /* background-image: url(./assets/images/moinmoin-pulseng.webp); */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.recipe-name {
+  text-align: center;
+}
+
+.recipe-home {
+  padding-bottom: 1rem;
+}
+
+.recipe-detail > p {
+  text-align: center;
+  font-weight: 500;;
+}
+
+/* .ingredient {
+  padding-top: 1rem;
+} */
+
+.instructions {
+  width: 70%;
+  justify-self: flex-start;
+}
+
+.instruction > li {
+  font-size: 40px;
+}
+
+.ingredients > li {
+  font-size: 40px;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home {
+  max-height: 100vh;
+  margin: 10rem;
+}
+
+.form {
+  width: 90%;
+}
+
+.recipes-form {
+  width: 70%;
+  margin-left: 2rem;
+}
+
+.search, .recipe {
+  padding: 1rem 2rem;
+  border-radius: 1.4rem;
+  width: 100%;
+  margin: 0 auto;
+  outline: none;
+  border: 1px solid #FF6600;
+}
+
+#search-recipe {
+  padding: 0.3rem 1rem;
+  width: 70%;
+  border-radius: 1rem;
+}
+
+.card {
+  margin: 2rem auto;
+  padding: 1rem;
+  width: 200px;
+  height: 170px;
+  border-radius: 1rem;
+  background-color: #FF6600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: #353424;
+}
+
+.equipment, .ingredients, .instruction {
+  margin-left: 1.5rem;
+}
+
+.container {
+  position: relative;
+}
+
+.close {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  background-color: #000;
+  color: #fff;
+  /* display: flex; */
+  justify-content: center;
+  align-items: start;
+  width: 38px;
+  height: 37px;
+  border-radius: 50%;
+  top: -19px;
+  right: 34.6rem;
+}
+
+/* ADMIN PART */
+
+/* Style the tab */
+.tab {
+  /* overflow: hidden; */
+  border: 1px solid #FF6600;
+  background-color: #353424;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: rgb(244, 242, 242);
+  padding: 14px 16px;
+  padding: 1rem 3rem;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: rgb(132, 132, 132);
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #FF6600;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #FF6600;
+  border-top: none;
+}
+
+.recipe-form {
+  padding: 15px 0px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.label {
+  text-align: left;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+
+.inputfield {
+  padding: 16px;
+  background-color: #fff;
+  color: #000000;
+  width: 100%;
+  border-radius: 1rem;
+  margin: 15px 0px;
+  outline: none;
+  border: 1px solid #FF6600;
+  font-size: 19px;
+}
+
+.newIngredientInput, .newInstructionInput, .newIngredientUpdateInput, .newInstructionUpdateInput {
+  background-color: #FF6600;
+  padding: 0.4rem 1rem;
+  outline: none;
+  border: 0px solid #1A535C;
+  border-radius: 0.5rem;
+  color: rgb(244, 242, 242);
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+.user-login, .admin-login, .newUser-form {
+  max-height: 100%;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  margin: 10rem 10rem;
+}
+
+.none {
+  display: none;
+}
+
+.button {
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px 0px;
+  border-radius: 1rem;
+  outline: none;
+  border: none;
+  color: #1A535C;
+  background-color: #FF6600;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.update {
+  padding: 0.7rem 1rem;
+  margin: 1rem auto;
+}
+
+.updating-form {
+  display: none;
+}
+
+.media-container {
+  /* width: 40%; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin: 0 2rem;
+}
+
+.round {
+  border-radius: 1rem;
+}
+
+.mobile {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .not-mobile, .user-content {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
+}

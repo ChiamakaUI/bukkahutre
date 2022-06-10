@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Bukkahut-Recipes | Admin Dashboard</title>
+</head>
+<body id="body">
+  <section class="admin-login none">
+    <h2 style="text-align: center; background-color: #fff; font-size: 35px;">Admin Login</h2>
+    <form class="admin-form">
+      <div class='form-group'>
+        <label for="admin_username" class="label">Email</label><br>
+        <input type="email" id="admin_username" class="admin_email inputfield" placeholder="enter email" required /><br>
+        <label for="admin_password" class="label">Password</label><br>
+        <input type="password" id="admin_password" class="admin_password inputfield" placeholder="enter password" required />
+      </div>
+      <div class='form-group'>
+        <button class='button' type='submit' style="margin: 1rem 0;">Submit</button><br>
+        <p><a href="./index.html" style="cursor: pointer; text-decoration: underline; color: #FF6600">Go to Homepage</a></p>
+      </div>
+    </form>
+  </section>
+  <section class="admin-content">
+    <nav class="nav flex admin_nav">
+      <div><img src="assets/images/bukkahutlogo.png" alt="bukkahut" width="100px" height="70px" /></div>
+      <div class="flex">
+        <p class="admin"><a href="#" class="signout" style="padding-right: 1.3rem;">Sign out</a></p>
+        <p class="admin"><a href="#" class="newUser">Add New User</a></p>
+      </div>
+    </nav>
+
+    <form class="newUser-form none">
+      <div class='form-group'>
+        <label for="username" class="label">Email</label><br>
+        <input type="email" id="username" class="email inputfield" placeholder="enter email" required /><br>
+        <label for="password" class="label">Password</label><br>
+        <input type="password" id="password" class="password inputfield" placeholder="enter password" required />
+      </div>
+      <div class='form-group'>
+        <button class='button' type='submit' style="margin: 1rem 0;">Add New User</button><br>
+        <p class='form-close' type="button" style="cursor: pointer; text-decoration: underline; color: #FF6600">Back</p>
+      </div>
+    </form>
+
+    <div class="recipe-section">
+      <!-- Tab links -->
+      <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'Add')">Add New Recipe</button>
+        <button class="tablinks" onclick="openCity(event, 'Update')">Edit Recipes</button>
+        <!-- <button class="tablinks" onclick="openCity(event, 'Calculate')">Recipe Calculator</button> -->
+      </div>
+      
+      <!-- Tab content -->
+      <div id="Add" class="tabcontent active">
+        <h3>Add a new recipe</h3>
+        <form class="recipe-form" id='form'>
+          <div class='form-group'>
+            <label class="label" for="recipe-name">Recipe Name</label> <br>
+            <input type="text" name='name' placeholder='enter recipe name' id='recipe-name' class="inputfield"
+              required><br>
+            <label class="label" for="recipe-time">Recipe Cooking Time</label> <br>
+            <input type="text" name='time' placeholder='enter cooking time' id='recipe-time' class="inputfield" required><br>
+            <label class="label" for="recipeImage">Recipe Image</label> <br>
+            <input type="file" name='Image' placeholder='Choose image file 850 x 500' id='recipeImage' accept="image/png, image/jpeg" class="inputfield"><br>
+            <label class="label" for="recipeVideo">Recipe Video</label> <br>
+            <input type="file" name='video' placeholder='Choose video file' id='recipeVideo' accept="video/*" class="inputfield"><br>
+            <div>
+              <label class="label" for="ingredients">Recipe Ingredients</label> <br>
+              <div class="ingredients_container">
+                <input type="text" name='ingredients' placeholder='enter list of ingrdients' id='ingredients' class="inputfield ingredientsList"><br>
+              </div>
+              <button class="newIngredientInput">Add</button>
+            </div>
+            <div>
+              <label class="label" for="instructions">Recipe Instructions</label> <br>
+              <div class="instructions_container">
+                <input type="text" name='instructions' placeholder='enter list of ingrdients' id='instructions' class="inputfield instructionsList"><br>
+              </div>
+              <button class="newInstructionInput">Add</button>
+            </div>
+            <input type='text' id='image-downloadUrl' name='random' class="imageDownloadUrl none" required/>
+            <input type='text' id='video-downloadUrl' name='random' class="videoDownloadUrl none" required/>
+          </div>
+          <div class="form-group">
+            <button class='button' type='submit'>Submit</button>
+          </div>
+        </form>
+      </div>
+      
+      <div id="Update" class="tabcontent">
+        <h3>Update Recipes</h3>
+        <form class="update-form">
+          <input type="search" id="update-recipe" class="input recipe update" placeholder="search recipes to update" />
+          <button type="submit" class="button">search</button>
+        </form>
+        <div class="container">
+          <span class="close">x</span>
+          <a href="#" class="all-recipes"></a>
+        </div>
+
+        <form class="updating-form" style="padding-top: 1rem">
+          <div class='form-group'>
+            <label class="label" for="update-recipe-name">Recipe Name</label> <br>
+            <input type="text" name='name' placeholder='enter recipe name' id='update-recipe-name' class="inputfield" required><br>
+            <label class="label" for="update-recipe-time">Recipe Cooking Time</label> <br>
+            <input type="text" name='time' placeholder='enter cooking time' id='update-recipe-time' class="inputfield" required><br>
+            <label class="label" for="update-recipeImage">Recipe Image</label> <br>
+            <input type="file" name='Image' placeholder='Choose image file' id='update-recipeImage' accept="image/png, image/jpeg"
+              class="inputfield imagefile" required><br>
+            <label class="label" for="update-recipeVideo">Recipe Video</label> <br>
+            <input type="file" name='video' placeholder='Choose video file' id='update-recipeVideo' accept="video/*" class="inputfield" required><br>
+            <div>
+              <label class="label" for="update_ingredients">Recipe Ingredients</label> <br>
+              <div class="ingredients_update_container">
+                <!-- <input type="text" name='ingredients' placeholder='enter list of ingrdients' id='update_ingredients'
+                  class="inputfield ingredientsUpdateList"> -->
+                  <br>
+              </div>
+              <button class="newIngredientUpdateInput">Add</button>
+            </div>
+            <div>
+              <label class="label" for="update_instructions">Recipe Instructions</label> <br>
+              <div class="instructions_update_container">
+                <!-- <input type="text" name='instructions' placeholder='enter list of ingrdients' id='update_instructions'
+                  class="inputfield instructionsUpdateList"> -->
+                  <br>
+              </div>
+              <button class="newInstructionUpdateInput">Add</button>
+            </div>
+            <input type='text' id='update-image-downloadUrl' name='random' class="imageDownloadUrl none" required/>
+            <input type='text' id='update-video-downloadUrl' name='random' class="videoDownloadUrl none" required/>
+          </div>
+          <div class="form-group">
+            <button class='button update-btn' type='submit'>Submit</button>
+            <p id="goback" type="button" style="cursor: pointer; text-decoration: underline; color: #FF6600">Back</p>
+          </div>
+        </form>
+        
+      </div>
+
+      
+    </div>
+  </section>
+
+  <script>
+   
+    function openCity(evt, cityName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+    
+  </script>
+  <script type='module'>
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
+    import { getFirestore, collection, getDocs, doc, query, where, setDoc } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js'
+    // import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js";
+
+    const APIKEY = '3dcfe8aa07caee3b5cf31f8cb8259765';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBXhz9n1bwKrhWwXXED2570SyUrIJoT6lI",
+      authDomain: "bukkahut-80159.firebaseapp.com",
+      projectId: "bukkahut-80159",
+      storageBucket: "bukkahut-80159.appspot.com",
+      messagingSenderId: "381102566327",
+      appId: "1:381102566327:web:5f9131990428befa76d632"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    // const storage = getStorage();
+
+    // Authentication elements
+    const newUser = document.querySelector('.newUser');
+    const formClose = document.querySelector('.form-close');
+    const newUserForm = document.querySelector('.newUser-form')
+    const adminForm = document.querySelector('.admin-form')
+    const section = document.querySelector('.recipe-section');
+    const email = document.querySelector('.email');
+    const password = document.querySelector('.password')
+    const adminEmail = document.querySelector('.admin_email');
+    const adminPassword = document.querySelector('.admin_password')
+    const adminLogin = document.querySelector('.admin-login')
+    const adminContent = document.querySelector('.admin-content')
+    const signout = document.querySelector('.signout');
+
+    // Adding new Recipe elements
+    const addRecipe = document.querySelector('.recipe-form');
+    const recipeInput = document.querySelectorAll('.inputfield')
+    const updateForm = document.querySelector('.update-form');
+    const image = document.getElementById('recipeImage');
+    const imageFile = document.querySelector('input[type="file"]');
+    const video = document.getElementById('recipeVideo');
+    const recipeName = document.getElementById('recipe-name');
+    const allRecipes = document.querySelector('.all-recipes');
+    const update = document.querySelector('.update');
+    const Close = document.querySelector('.close');
+    const updatingForm = document.querySelector('.updating-form');
+    const imageUrl = document.getElementById('image-downloadUrl');
+    const videoUrl = document.getElementById('video-downloadUrl');
+    const recipeIngredients = document.getElementById('ingredients');
+    const recipeInstructions = document.getElementById('instructions');
+    const recipeTime = document.getElementById('recipe-time');
+    const newIngredientInput = document.querySelector('.newIngredientInput')
+    const newInstructionInput = document.querySelector('.newInstructionInput')
+    const ingredients_container = document.querySelector('.ingredients_container')
+    const instructions_container = document.querySelector('.instructions_container')
+    const ingredientsList = document.querySelectorAll('.ingredientsList')
+    const instructionsList = document.querySelectorAll('.instructionsList')
+    const Update = document.getElementById('Update');
+
+    // Updating Recipe elements
+    const updateRecipeName = document.getElementById('update-recipe-name')
+    const updateRecipeTime = document.getElementById('update-recipe-time')
+    const updateRecipeImage = document.getElementById('update-recipeImage')
+    const updateRecipeVideo = document.getElementById('update-recipeVideo')
+    const ingredientsUpdateList = document.querySelectorAll('.ingredientsUpdateList')
+    const instructionsUpdateList = document.querySelectorAll('.instructionsUpdateList')
+    const updateRecipeImageUrl = document.getElementById('update-image-downloadUrl')
+    const updateRecipeVideoUrl = document.getElementById('update-video-downloadUrl')
+    const updateRecipeInstructions = document.querySelector('.instructions_update_container')
+    const updateRecipeIngredients = document.querySelector('.ingredients_update_container')
+    const updateRecipeIngBtn = document.querySelector('.newIngredientUpdateInput')
+    const updateRecipeInsBtn = document.querySelector('.newInstructionUpdateInput')
+    const updateImageFile = document.querySelector('.imagefile');
+    const updateVideo = document.getElementById('update-recipeVideo');
+    const goBack = document.getElementById('goback');
+    
+    //Check if there is a loggedIn admin
+    window.addEventListener('load', () => {
+      if (sessionStorage.getItem('admin') === null || sessionStorage.getItem('admin') === undefined) {
+        console.log('seen')
+        adminLogin.style.display = 'block';
+        adminContent.style.display = 'none'
+      } else {
+        adminLogin.style.display = 'none';
+        adminContent.style.display = 'block';
+      }
+    })
+
+    //admin firebase sign in with email and password. NB: password has to be >= 6 characters
+    adminForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const emailValue = adminEmail.value;
+      const passwordValue = adminPassword.value;
+      console.log(emailValue, passwordValue)
+
+      //sign up
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, emailValue, passwordValue)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log(emailValue);
+          sessionStorage.setItem('admin', emailValue)
+          alert('Admin login successful!')
+          location.reload()
+          // authArea.innerText = `${sessionStorage.getItem('email')}`
+          // authArea.style.paddingLeft = '10px';
+          // authArea.style.color = '#f88835';
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+    })
+
+    // Admin sign out
+    signout.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      sessionStorage.removeItem('admin');
+      location.reload()
+    })
+
+    // Show the add new user form
+    newUser.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      newUserForm.style.display = 'block'
+      section.style.display = 'none';
+    })
+
+    // Firebase function for creating new users from the add new user form
+    newUserForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const emailValue = email.value;
+      const passwordValue = password.value;
+      console.log(emailValue, passwordValue)
+
+      //sign up
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, emailValue, passwordValue)
+        .then((userCredential) => {
+          // Signed in 
+          // console.log(emailValue)
+          const user = userCredential.user;
+          // $('.signup-area').hide();
+          // sessionStorage.setItem('email', emailValue)
+          alert('New User Created!')
+          location.reload()
+          // authArea.innerText = `${emailValue}`
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+    })
+
+    // Close the add new user form and show the admin home
+    formClose.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        newUserForm.style.display = 'none'
+        section.style.display = 'block';
+      })
+
+    // Function for uploading images and setting the image url
+    image.addEventListener('change', () => {
+      const name = recipeName.value;
+      const str = image.value;
+
+      const formData = new FormData();
+
+      formData.append('image', imageFile.files[0]);
+
+      fetch(`https://api.imgbb.com/1/upload?key=${APIKEY}`, {
+        method: 'POST',
+        body: formData
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          console.log('Success:', result);
+          imageUrl.value = result.data.url
+          console.log(imageUrl.value);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+     })
+
+    // Function for uploading videos and setting the video url
+    const url = "https://api.cloudinary.com/v1_1/vc3/video/upload";
+
+    video.addEventListener("change", (e) => {
+      e.preventDefault();
+
+      const videoFile = document.getElementById('recipeVideo');
+      const formData = new FormData();
+
+      let file = videoFile.files[0];
+      formData.append("file", file);
+      formData.append("upload_preset", "yiml1of9");
+
+      fetch(url, {
+        method: "POST",
+        body: formData
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          videoUrl.value = data.url
+          console.log(videoUrl.value)
+          // document.getElementById("data").innerHTML += data;
+        });
+        
+    });
+
+    // creating new add new recipe input fields for ingredients 
+    newIngredientInput.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('clicked');
+      let newInput = document.createElement('input');
+      newInput.classList.add('inputfield');
+      newInput.classList.add('ingredientsList');
+      ingredients_container.append(newInput);
+    })
+
+      // creating new add new recipe input fields for instructions 
+      newInstructionInput.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('clicked');
+        let newInput = document.createElement('input');
+        newInput.classList.add('inputfield');
+        newInput.classList.add('instructionsList');
+        instructions_container.append(newInput);
+      })
+
+      // creating new update recipe input fields for ingredients 
+      updateRecipeIngBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('clicked');
+        let newInput = document.createElement('input');
+        newInput.classList.add('inputfield');
+        newInput.classList.add('ingredientsUpdateList');
+        updateRecipeIngredients.append(newInput);
+      })
+
+      // creating new update recipe input fields for instructions 
+      updateRecipeInsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('clicked');
+        let newInput = document.createElement('input');
+        newInput.classList.add('inputfield');
+        newInput.classList.add('instructionsUpdateList');
+        updateRecipeInstructions.append(newInput)
+      })
+      
+      // Firebase function for adding a new recipe document to the Recipe collection
+      addRecipe.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const ingredientsList = document.querySelectorAll('.ingredientsList')
+        const instructionsList = document.querySelectorAll('.instructionsList')
+        const Name = recipeName.value
+        const imgUrl = imageUrl.value;
+        const vidUrl = videoUrl.value;
+        const Instruction = recipeInstructions.value;
+        const Ingredients = recipeIngredients.value;
+        const CookingTime = recipeTime.value
+        const ing = []
+        console.log(ingredientsList);
+        ingredientsList.forEach(inglst => {
+          inglst.value !== '' ? ing.push(inglst.value) : ing
+          return ing;
+        });
+
+        const ins = []
+        console.log(instructionsList);
+        instructionsList.forEach(inslst => {
+          inslst.value !== '' ? ins.push(inslst.value) : ins
+          return ins;
+        });
+
+        let allInstructions = ins;
+        let allIngredients = ing;
+
+        console.log(allInstructions, allIngredients)
+
+        const recipesRef = collection(db, `Recipes`); ///get the booking collection
+        const snaps = await getDocs(recipesRef); //get the documents in the collection
+        console.log(snaps);
+
+        if (!snaps.exists) {
+          // const { bookingEmail, bookingName, total } = user;
+          const createdAt = new Date();
+
+          try {
+            console.log('saving...')
+            await setDoc(doc(db, 'Recipes', `${Name}`), {
+              Name,
+              imgUrl,
+              vidUrl,
+              Instructions: allInstructions,
+              Ingredients: allIngredients,
+              CookingTime
+            });
+            alert('Recipe Added')
+            addRecipe.reset();
+          } catch (error) {
+            console.log("Error Creating User", error.message);
+          }
+        } else {
+          // btn.innerHTML = `Already Subscribed!`
+          addRecipe.reset();
+        }
+      })
+
+      // Search form to get the recipe to be updated
+      updateForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // location.reload();
+        let recipeIng, recipeIns, Ingnodes, Insnodes;
+        
+        const value = update.value;
+        localStorage.removeItem('recipeUpdate')
+        updateRecipeName.value = '';
+        updateRecipeTime.value = '';
+
+        // let recipeIng = recipeSearch.Ingredients;
+        // let recipeIns = recipeSearch.Instructions;
+
+        allRecipes.innerHTML = '<p>...Loading</p>'
+
+        const recipesRef = collection(db, 'Recipes')
+
+        // console.log(recipesRef);
+        const q = query(recipesRef, where('Name', '==', value))
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          const recipeObj = doc.data();
+          // console.log(recipeObj)
+          localStorage.setItem('recipeUpdate', JSON.stringify(recipeObj))
+          // name.innerHTML = recipeObj.Name
+        });
+
+        const recipeSearch = JSON.parse(localStorage.getItem('recipeUpdate'))
+        // console.log(recipeSearch);
+
+        allRecipes.innerHTML = `${recipeSearch.Name} Recipe`
+        allRecipes.classList.add('card')
+        Close.style.display = 'flex';
+
+        // Getting the vsalues of the returned recipe from the search function and appending them in the respective input fields
+        updateRecipeName.value = recipeSearch.Name;
+        updateRecipeTime.value = recipeSearch.CookingTime;
+        recipeIng = recipeSearch.Ingredients;
+        recipeIns = recipeSearch.Instructions;
+
+        console.log(recipeIng)
+
+        Ingnodes = recipeIng.map(ing => {
+          let newInput = document.createElement('input');
+          newInput.classList.add('inputfield');
+          newInput.classList.add('ingredientsUpdateList');
+          newInput.value = ing;
+          // console.log(newInput.value)
+          return newInput;
+        });
+
+        Insnodes = recipeIns.map(ins => {
+          let newInput = document.createElement('input');
+          newInput.classList.add('inputfield');
+          newInput.classList.add('instructionsUpdateList');
+          newInput.value = ins;
+          // console.log(newInput.value)
+          return newInput;
+        });
+
+        console.log(Ingnodes)
+        updateRecipeIngredients.append(...Ingnodes);
+        updateRecipeInstructions.append(...Insnodes);
+      })
+
+      // updateRecipeIngredients.remove();
+      //   updateRecipeInstructions.remove()
+      // const recipeSearch = JSON.parse(localStorage.getItem('recipeUpdate'))
+
+      // Close the search result block if not needed
+      Close.addEventListener('click', () => {
+        console.log(allRecipes)
+        allRecipes.innerHTML = '';
+        allRecipes.classList.remove('card')
+        Close.style.display ='none';
+      })
+
+      // Show the form for updating the returned recipe from the search form function
+      allRecipes.addEventListener('click', () => {
+        console.log('clicked');
+
+        updatingForm.style.display = 'block';
+        update.style.display = 'none';
+        allRecipes.innerHTML = '';
+        allRecipes.classList.remove('card')
+        Close.style.display = 'none';
+      })
+
+      // Uploading the updated image and setting the value
+      updateRecipeImage.addEventListener('change', () => {
+        const name = recipeName.value;
+        const str = image.value;
+
+        const updateBtn = document.querySelector('.update-btn');
+        console.log(updateImageFile)
+
+        const formData = new FormData();
+
+        formData.append('image', updateImageFile.files[0]);
+        alert('...uploading image')
+        updateBtn.style.cursor = 'not-allowed'
+
+        fetch(`https://api.imgbb.com/1/upload?key=${APIKEY}`, {
+          method: 'POST',
+          body: formData
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            console.log('Success:', result);
+            updateRecipeImageUrl.value = result.data.url
+            updateBtn.style.cursor = 'pointer'
+            console.log(updateRecipeImageUrl.value);
+          })
+          .catch((error) => {
+            alert('An error occurred, check network connection and try again')
+            console.error('Error:', error);
+          });
+      })
+
+      //uploading the updated video and setting the value
+      
+
+        updateVideo.addEventListener("change", (e) => {
+          e.preventDefault();
+          const url = "https://api.cloudinary.com/v1_1/vc3/video/upload";
+
+          const updateVideoFile = document.getElementById('update-recipeVideo');
+          
+          const updateBtn = document.querySelector('.update-btn');
+          
+          const formData = new FormData();
+
+          let file = updateVideoFile.files[0];
+          formData.append("file", file);
+          formData.append("upload_preset", "yiml1of9");
+          alert('...uploading video')
+          updateBtn.style.cursor = 'not-allowed'
+
+          fetch(url, {
+            method: "POST",
+            body: formData
+          })
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data.signature);
+              console.log(data);
+              updateRecipeVideoUrl.value = data.url
+              alert('upload complete')
+              updateBtn.style.cursor = 'pointer'
+              console.log(updateRecipeVideoUrl.value)
+              // document.getElementById("data").innerHTML += data;
+            })
+            .catch((error) => {
+              alert('An error occurred, check network connection and try again')
+            })
+
+        });
+
+
+      // Firebase function for updating the recipe with the required informations
+      updatingForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        // console.log(updateRecipeImageUrl.value, updateRecipeVideoUrl.value)
+        // const updateBtn = document.querySelector('.update-btn');
+        // if (updateRecipeImageUrl.value === '' || updateRecipeVideoUrl.value === '') updateBtn.style.cursor = 'not-allowed'
+
+        const ingredientsList = document.querySelectorAll('.ingredientsUpdateList')
+        const instructionsList = document.querySelectorAll('.instructionsUpdateList')
+        const Name = updateRecipeName.value
+        const imgUrl = updateRecipeImageUrl.value;
+        const vidUrl = updateRecipeVideoUrl.value
+        // const Instruction = recipeInstructions.value;
+        // const Ingredients = recipeIngredients.value;
+        const CookingTime = updateRecipeTime.value
+        const ing = []
+        console.log(ingredientsList);
+        ingredientsList.forEach(inglst => {
+          inglst.value !== '' ? ing.push(inglst.value) : ing
+          return ing;
+        });
+
+        const ins = []
+        console.log(instructionsList);
+        instructionsList.forEach(inslst => {
+          inslst.value !== '' ? ins.push(inslst.value) : ins
+          return ins;
+        });
+
+        // console.log(ing, ins)
+
+        let allInstructions = ins;
+        let allIngredients = ing;
+
+        console.log(allInstructions, allIngredients)
+
+        const recipesRef = collection(db, `Recipes`); ///get the recipe collection
+        const snaps = await getDocs(recipesRef); //get the documents in the collection
+        console.log(snaps);
+
+        console.log(allIngredients, allInstructions)
+
+        if (!snaps.exists) {
+          // const { bookingEmail, bookingName, total } = user;
+          const createdAt = new Date();
+          
+
+          try {
+            console.log('saving...')
+            await setDoc(doc(db, 'Recipes', `${Name}`), {
+              Name,
+              imgUrl,
+              vidUrl,
+              Instructions: allInstructions,
+              Ingredients: allIngredients,
+              CookingTime
+            });
+            alert('Recipe Updated')
+            updatingForm.reset();
+            updatingForm.style.display = 'none';
+            update.style.display = 'block';
+          } catch (error) {
+            console.log("Error Creating User", error.message);
+          }
+        }
+      })
+    goBack.addEventListener('click', () => {
+      console.log('call');
+      location.reload();
+
+      updatingForm.style.display = 'none';
+      update.style.display = 'block';
+      Update.style.display = 'block';
+      
+    })
+  </script>
+</body>
+</html>
