@@ -1,147 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Bukkahut-Recipes | Recipe</title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Bukkahut-Recipes | Recipe</title>
+  </head>
 
-<body>
-  <section class="user-login none">
-    <h2 style="text-align: center; background-color: #fff; font-size: 35px;">Login</h2>
-    <form class="user-form">
-      <div class='form-group'>
-        <label for="user_username" class="label">Email</label><br>
-        <input type="email" id="user_username" class="user_email inputfield" placeholder="enter email" required /><br>
-        <label for="user_password" class="label">Password</label><br>
-        <input type="password" id="user_password" class="user_password inputfield" placeholder="enter password"
-          required />
-      </div>
-      <div class='form-group'>
-        <button class='button' type='submit' style="margin: 1rem 0;">Submit</button><br>
-        <p><a href="./index.html" style="text-decoration: underline;">Go to Home</a></p>
-      </div>
-    </form>
-  </section>
-  <div class="user-content">
-    <nav class="nav flex">
-      <div><img src="assets/images/bukkahutlogo.png" alt="bukkahut" width="100px" height="70px" /></div>
-      <form class="form recipes-form">
-        <input type="search" id="search-recipe" class="input recipe" placeholder="search recipes" />
+  <body>
+    <section class="user-login none">
+      <h2 style="text-align: center; background-color: #fff; font-size: 35px">
+        Login
+      </h2>
+      <form class="user-form">
+        <div class="form-group">
+          <label for="user_username" class="label">Email</label><br />
+          <input
+            type="email"
+            id="user_username"
+            class="user_email inputfield"
+            placeholder="enter email"
+            required
+          /><br />
+          <label for="user_password" class="label">Password</label><br />
+          <input
+            type="password"
+            id="user_password"
+            class="user_password inputfield"
+            placeholder="enter password"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <button class="button" type="submit" style="margin: 1rem 0">
+            Submit</button
+          ><br />
+          <p>
+            <a href="./index.html" style="text-decoration: underline"
+              >Go to Home</a
+            >
+          </p>
+        </div>
       </form>
-      <p><a href="#" class="signout">Sign out</a></p>
-    </nav>
-    
-    <div class="container">
-      <span class="close">x</span>
-      <a href="./recipe.html" class="search-results"></a>
-    </div>
-    
-    <section class="recipe-home">
-      <div class="recipe-detail">
-        <h1 class="recipe-name"><span class="recipe-time"></span></h1>
-        <p>The quantities listed below can be used to make 5 portions</p>
-        <p>How many portions are we making today</p> <input type="number" id="por" value="5"/>
-      </div>
-      <div class="flex recipe-display">
+    </section>
+    <div class="user-content">
+      <nav class="nav flex">
         <div>
-          <div class="ingredient">
-            <h3>Ingredients</h3>
-            <ol class="ingredients"></ol>
+          <img
+            src="assets/images/bukkahutlogo.png"
+            alt="bukkahut"
+            width="100px"
+            height="70px"
+          />
+        </div>
+        <form class="form recipes-form">
+          <input
+            type="search"
+            id="search-recipe"
+            class="input recipe"
+            placeholder="search recipes"
+          />
+        </form>
+        <p><a href="#" class="signout">Sign out</a></p>
+      </nav>
+
+      <div class="container">
+        <span class="close">x</span>
+        <a href="./recipe.html" class="search-results"></a>
+      </div>
+
+      <section class="recipe-home">
+        <div class="recipe-detail">
+          <h1 class="recipe-name"><span class="recipe-time"></span></h1>
+          <p>The Ingredients listed below can be used to make <span id="quantitySpan">5</span> portions. To change the number of portions, click on the dropdown menu below</p>
+          <!-- <p>How many portions are we making today</p> <input type="number" id="por" value="5"/> -->
+          
+          <div class="selectDiv">
+            <label for="cars">Select portions:</label>
+            <select name="portions" id="portions">
+              <option value="1">5</option>
+              <option value="3">5 * 3</option>
+              <option value="5">5 * 5</option>
+              <option value="10">5 * 10</option>
+              <option value="15">5 * 15</option>
+            </select>
           </div>
+          
         </div>
-        <div class="instructions">
-          <h3>Instructions</h3>
-          <ol class="instruction"></ol>
-        </div>
-        <div class="instructions">
+        <div class="flex recipe-display">
+          <div>
+            <div class="ingredient">
+              <h3>Ingredients</h3>
+              <ol class="ingredients"></ol>
+            </div>
+          </div>
+          <div class="instructions">
+            <h3>Instructions</h3>
+            <ol class="instruction"></ol>
+          </div>
+          <!-- <div class="instructions">
           <h3>Calculator</h3>
           <p></p>
           <ol class="calculator">
 
           </ol>
+        </div> -->
         </div>
-      
-      </div>
-      <div class="media-container">
-      </div>
-      
-    </section>
-  </div>
-  
-  <script type='module'>
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
-    import { getFirestore, collection, getDocs, doc, query, where, setDoc } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js'
-    // import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js";
+        <div class="media-container"></div>
+      </section>
+    </div>
 
-    // const APIKEY = '3dcfe8aa07caee3b5cf31f8cb8259765';
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        getDocs,
+        doc,
+        query,
+        where,
+        setDoc,
+      } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js";
+      // import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyBXhz9n1bwKrhWwXXED2570SyUrIJoT6lI",
-      authDomain: "bukkahut-80159.firebaseapp.com",
-      projectId: "bukkahut-80159",
-      storageBucket: "bukkahut-80159.appspot.com",
-      messagingSenderId: "381102566327",
-      appId: "1:381102566327:web:5f9131990428befa76d632"
-    };
+      // const APIKEY = '3dcfe8aa07caee3b5cf31f8cb8259765';
 
-    const userForm = document.querySelector('.user-form');
-    const userEmail = document.querySelector('.user_email');
-    const userPassword = document.querySelector('.user_password')
-    const userLogin = document.querySelector('.user-login')
-    const userContent = document.querySelector('.user-content')
-    const signout = document.querySelector('.signout');
+      const firebaseConfig = {
+        apiKey: "AIzaSyBXhz9n1bwKrhWwXXED2570SyUrIJoT6lI",
+        authDomain: "bukkahut-80159.firebaseapp.com",
+        projectId: "bukkahut-80159",
+        storageBucket: "bukkahut-80159.appspot.com",
+        messagingSenderId: "381102566327",
+        appId: "1:381102566327:web:5f9131990428befa76d632",
+      };
 
-    window.addEventListener('load', () => {
-      if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === undefined) {
-        console.log('seen')
-        userLogin.style.display = 'block';
-        userContent.style.display = 'none'
-      } else {
-        userLogin.style.display = 'none';
-        userContent.style.display = 'block';
-      }
-    })
+      const userForm = document.querySelector(".user-form");
+      const userEmail = document.querySelector(".user_email");
+      const userPassword = document.querySelector(".user_password");
+      const userLogin = document.querySelector(".user-login");
+      const userContent = document.querySelector(".user-content");
+      const signout = document.querySelector(".signout");
 
-    userForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+      window.addEventListener("load", () => {
+        if (
+          sessionStorage.getItem("user") === null ||
+          sessionStorage.getItem("user") === undefined
+        ) {
+          console.log("seen");
+          userLogin.style.display = "block";
+          userContent.style.display = "none";
+        } else {
+          userLogin.style.display = "none";
+          userContent.style.display = "block";
+        }
+      });
 
-      const emailValue = userEmail.value;
-      const passwordValue = userPassword.value;
-      console.log(emailValue, passwordValue)
+      userForm.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-      //sign up
-      const auth = getAuth();
-      signInWithEmailAndPassword(auth, emailValue, passwordValue)
-        .then((userCredential) => {
-          // Signed in 
-          const user = userCredential.user;
-          console.log(emailValue);
-          sessionStorage.setItem('user', emailValue)
-          alert('login successful!')
-          location.reload()
-          // authArea.innerText = `${sessionStorage.getItem('email')}`
-          // authArea.style.paddingLeft = '10px';
-          // authArea.style.color = '#f88835';
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
+        const emailValue = userEmail.value;
+        const passwordValue = userPassword.value;
+        console.log(emailValue, passwordValue);
+
+        //sign up
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, emailValue, passwordValue)
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(emailValue);
+            sessionStorage.setItem("user", emailValue);
+            alert("login successful!");
+            location.reload();
+            // authArea.innerText = `${sessionStorage.getItem('email')}`
+            // authArea.style.paddingLeft = '10px';
+            // authArea.style.color = '#f88835';
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          });
+      });
+
+      signout.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        sessionStorage.removeItem("user");
+        location.reload();
+      });
+    </script>
+    <script>
+      const portions = document.querySelector("#portions");
+      const quantitySpan = document.getElementById('quantitySpan')
+      const recipeSearch = JSON.parse(localStorage.getItem("recipe"));
+      const ingredient = document.querySelector(".ingredients");
+      const Ingredients = recipeSearch.Ingredients;
+      portions.addEventListener("change", (e) => {
+        let option = portions.options[portions.selectedIndex];
+        quantitySpan.innerHTML = 5 * option.value
+        const calNodes = Ingredients.map((element) => {
+          let calList = document.createElement("li");
+          const portionNum = document.querySelector("#portions").value;
+          calList.textContent = element.replace(/\d/g, (number) => {
+            return number * option.value;
+          });
+          return calList;
         });
-    })
-
-    signout.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      sessionStorage.removeItem('user');
-      location.reload()
-    })
-  </script>
-  <script type='module' src="main.js"></script>
-</body>
-
+        ingredient.innerHTML = "";
+        ingredient.append(...calNodes);
+      });
+    </script>
+    <script type="module" src="main.js"></script>
+  </body>
 </html>

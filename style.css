@@ -300,6 +300,18 @@ a {
 .mobile {
   display: none;
 }
+.selectDiv{
+  width: 55%;
+  margin: 1% auto;
+}
+
+#portions{
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 1%;
+
+}
 
 @media screen and (max-width: 1000px) {
   .not-mobile, .user-content {

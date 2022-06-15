@@ -22,15 +22,21 @@ const form = document.querySelector('.form');
 const name = document.querySelector('.recipe-name');
 const ingredient = document.querySelector('.ingredients')
 const instruction = document.querySelector('.instruction')
-const calculator = document.querySelector('.calculator')
+// const portions = document.querySelector('.portions')
 const time = document.querySelector('.recipe-time');
 // const container = document.querySelector('.container');
 const Close = document.querySelector('.close');
 const addRecipe = document.querySelector('.recipe-form');
 const add = document.querySelector('.add');
 const imgContainer = document.querySelector('.media-container');
+
 // const portions = document.querySelector('#por');
 // var portionNum;
+
+// console.log(portions)
+// portions.addEventListener('change', async(e)=>{
+//     console.log(e)
+// })
 
 
 form.addEventListener('submit', async (e) => {
@@ -83,17 +89,17 @@ let Insnodes = newInstruction.map(ins => {
   return insList;
 });
 
-let calNodes = newIngredient.map(ing => {
-  console.log(ing.split(' '))
-  let calList = document.createElement('li');
-  let portionNum = document.querySelector('#por').value
-  // console.log(portionNum)
-   calList.textContent = ing.replace(/\d/g, number =>{
-    return number * portionNum
-  })
-  return calList
-})
-calculator.append(...calNodes);
+// let calNodes = newIngredient.map(ing => {
+//   console.log(ing.split(' '))
+//   let calList = document.createElement('li');
+//   let portionNum = document.querySelector('#por').value
+//   // console.log(portionNum)
+//    calList.textContent = ing.replace(/\d/g, number =>{
+//     return number * portionNum
+//   })
+//   return calList
+// })
+// calculator.append(...calNodes);
 
 const img = document.createElement('img');
 const recipeVideo = document.createElement('video');
